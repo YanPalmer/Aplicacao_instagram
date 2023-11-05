@@ -19,7 +19,12 @@ async function cadastrarUsuario() {
                 })
             })
             // Parei aqui...
-
+            const responseJSON = await response.json();
+            console.log(responseJSON.message);
+            if (responseJSON.redirect === true) {
+                window.alert("Usuário cadastrado com sucesso!");
+                window.location.href = 'http://localhost:3000/index.html';
+            }
 
         } else {
             const camposFaltando = [];
