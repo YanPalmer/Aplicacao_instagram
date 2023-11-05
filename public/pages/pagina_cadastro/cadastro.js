@@ -24,6 +24,8 @@ async function cadastrarUsuario() {
             if (responseJSON.redirect === true) {
                 window.alert("Usuário cadastrado com sucesso!");
                 window.location.href = 'http://localhost:3000/index.html';
+            } else {
+                window.alert(responseJSON.message);
             }
 
         } else {

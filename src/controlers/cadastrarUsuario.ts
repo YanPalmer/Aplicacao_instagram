@@ -8,10 +8,10 @@ export async function cadastrarUsuario(req: Request, res: Response) {
     const data = req.body
     try {
         // Verificar no banco de dados se o email inserido EXISTE
-        const userDB = await AppDataSource.getRepository(User).findOne({
+        const userDB_email = await AppDataSource.getRepository(User).findOne({
             where: { email: data.email }
         })
-        if (userDB === null) {
+        if (userDB_email === null) {
             const user = new User();
             user.name = data.name;
             user.email = data.email;
@@ -30,7 +30,7 @@ export async function cadastrarUsuario(req: Request, res: Response) {
         } else {
             return res.status(409).json({
                 ok: false,
-                message: "O valor recebido na solicitação já existe no banco de dados!",
+                message: `O email "${data.email}" já existe no banco de dados!`,
                 redirect: false
             })
         }
@@ -47,29 +47,29 @@ export async function validarUsuario(req: Request, res: Response) {
     const data = req.body;
     // console.log(data);
     try {
-        const userDB = await AppDataSource.getRepository(User).findOne({
+        const userDB_email = await AppDataSource.getRepository(User).findOne({
             where: {
                 email: data.email
             }
         })
-        
-        if ((userDB?.email === data.email) && (userDB?.password === data.password)) {
+        // Verifica se o email e senha são iguais ao do banco de dados
+        if ((userDB_email?.email === data.email) && (userDB_email?.password === data.password)) {
             return res.status(200).json({
                 ok: true,
                 message: "User validated",
                 body: {
-                    name: userDB?.name,
-                    email: userDB?.email
+                    name: userDB_email?.name,
+                    email: userDB_email?.email
                 },
                 redirect: true
             });
-        } else if ((userDB?.email === data.email) && (data.password != userDB?.password)) {
+        } else if ((userDB_email?.email === data.email) && (data.password != userDB_email?.password)) {
             return res.status(500).json({
                 ok: false,
                 message: "Senha não corresponde",
                 redirect: false
             })
-        } else if (userDB?.email != data.email) {
+        } else if (userDB_email?.email != data.email) {
             return res.status(500).json({
                 ok: false,
                 message: "Email não existente!",
@@ -78,6 +78,6 @@ export async function validarUsuario(req: Request, res: Response) {
         }
 
     } catch (error) {
-        console.error("Erro ao validar usuário")
+        console.error("Erro ao validar usuário", error);
     }
 }
