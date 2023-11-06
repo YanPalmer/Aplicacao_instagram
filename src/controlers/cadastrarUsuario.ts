@@ -57,8 +57,8 @@ export async function validarUsuario(req: Request, res: Response) {
             return res.status(200).json({
                 ok: true,
                 message: "User validated",
-                id: userDB_email?.id,
-                email: userDB_email?.email,
+                // id: userDB_email?.id,
+                // email: userDB_email?.email,
                 // body: {
                 //     name: userDB_email?.name,
                 //     email: userDB_email?.email

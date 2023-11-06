@@ -16,6 +16,14 @@ export class User {
     @Column()
     password: string;
 
+    // Implementar
+    // @Column()
+    // bio: string;
+
+    // Implementar
+    // @Column()
+    // seguidores: number;
+
     @OneToMany(() => Post, post =>  post.user)
     posts: Post[];
 }
