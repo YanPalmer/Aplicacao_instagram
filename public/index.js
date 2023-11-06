@@ -22,7 +22,8 @@ async function validar() {
             console.log(responseJSON.message);
             if (responseJSON.redirect === true) {
                 window.alert("Usuário validado com sucesso");
-                window.location.href = 'http://localhost:3000/pages/pagina_inicial/pagina_inicial.html';
+                const response2 = fetch(`/pages/pagina_inicial/${responseJSON.id}/${responseJSON.email}/pagina_inicial.html`)
+                // window.location.href = 'http://localhost:3000/pages/pagina_inicial/pagina_inicial.html';
             } else {
                 window.alert(responseJSON.message);
             }

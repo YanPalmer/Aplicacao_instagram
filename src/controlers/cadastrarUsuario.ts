@@ -57,12 +57,14 @@ export async function validarUsuario(req: Request, res: Response) {
             return res.status(200).json({
                 ok: true,
                 message: "User validated",
-                body: {
-                    name: userDB_email?.name,
-                    email: userDB_email?.email
-                },
+                id: userDB_email?.id,
+                email: userDB_email?.email,
+                // body: {
+                //     name: userDB_email?.name,
+                //     email: userDB_email?.email
+                // },
                 redirect: true
-            });
+            })/*.redirect('/pages/pagina_inicial/pagina_inicial.html')*/;
         } else if ((userDB_email?.email === data.email) && (data.password != userDB_email?.password)) {
             return res.status(500).json({
                 ok: false,
@@ -80,4 +82,11 @@ export async function validarUsuario(req: Request, res: Response) {
     } catch (error) {
         console.error("Erro ao validar usuário", error);
     }
+}
+
+export async function loginUsuario(req: Request, res: Response) {
+    const data = req.params;
+    console.log(data);
+    res.redirect('')
+    // Ainda não redireciona
 }
