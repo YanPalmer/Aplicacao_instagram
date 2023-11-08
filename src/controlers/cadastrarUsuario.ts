@@ -11,6 +11,7 @@ export async function cadastrarUsuario(req: Request, res: Response) {
         const userDB_email = await AppDataSource.getRepository(User).findOne({
             where: { email: data.email }
         })
+        // Se o email não existir, cria um novo usuário e atribui uma página
         if (userDB_email === null) {
             const user = new User();
             user.name = data.name;
