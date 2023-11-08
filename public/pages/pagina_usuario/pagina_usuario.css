@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+}
+
+body h1 {
+    position: relative;
+    font-size: 2.5em;
+}
+
+body h2 {
+    position: relative;
+    margin: 5px 10px;
+}
+
+body div#informacoesPessoais {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+}
+
+
+body main {
+    position: relative;
+    width: 100%;
+}
+
+body main div#areaPublicacao {
+    position: relative;
+    margin: 10px 20px;
+    padding: 0 15px;
+    font-size: 2em;
+    font-weight: 900;
+    background-color: rgb(201, 201, 201);
+}
+
+body main section {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+body main section article {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    border: 0.1px solid gray;
+}
+
+body main section article h3 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 3px 0;
+    margin: 3px 10px;
+    border-radius: 15px;
+    background-color: cadetblue;
+}
+
+body main section article img {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    /* Mantém a proporção, mas é redimensionado para caber na dimensão especificada */
+    object-fit: contain;
+    border-bottom: 0.1px solid grey;
+}
+
+body main section article p {
+    position: relative;
+    margin: 5px 4px;
+    text-indent: 6px;
+    overflow: auto;
+    height: 86px;
+}

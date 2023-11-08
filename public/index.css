@@ -7,13 +7,13 @@
 body {
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     background: no-repeat url(./images/plano_de_fundo_instagram.jpeg);
     background-size: cover;
 }
 
 body h1 {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 3em;
     display: flex;
