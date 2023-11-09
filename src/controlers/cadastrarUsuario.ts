@@ -55,7 +55,7 @@ export async function validarUsuario(req: Request, res: Response) {
         })
         // Verifica se o email e senha são iguais ao do banco de dados
         if ((userDB_email?.email === data.email) && (userDB_email?.password === data.password)) {
-            return res.status(200).redirect(`/pagina_usuario/${userDB_email?.id}/${userDB_email?.name}/${userDB_email?.password}`);
+            return res.status(200).redirect(`/pagina_usuario/${userDB_email?.id}/${userDB_email?.name}/${userDB_email?.email}`);
         } else if ((userDB_email?.email === data.email) && (data.password != userDB_email?.password)) {
             return res.status(500).json({
                 ok: false,
@@ -76,19 +76,15 @@ export async function validarUsuario(req: Request, res: Response) {
 }
 
 
-// export async function loginUsuario(req: Request, res: Response) {
-//     const data = req.params;
-//     console.log(data);
-//     res.redirect('')
-//     // Ainda não redireciona
-// }
-
-
 // Aqui devo enviar os dados do usuário
-export async function receberDadosDaPagina(req: Request, res: Response) {
+export async function loginUsuario(req: Request, res: Response) {
     const data = req.body;
     console.log(data)
-    res.status(200).redirect(``)
+    res.status(200).json({
+        ok: true,
+        message: "Usuário logado",
+        dados: data
+    })
     // try {
     //     const user = await AppDataSource.getRepository(User).findOne({
     //         where: { id: parseInt(idUsuario) }
