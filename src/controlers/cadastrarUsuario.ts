@@ -85,9 +85,29 @@ export async function validarUsuario(req: Request, res: Response) {
     }
 }
 
-export async function loginUsuario(req: Request, res: Response) {
-    const data = req.params;
-    console.log(data);
-    res.redirect('')
-    // Ainda não redireciona
-}
+
+// export async function loginUsuario(req: Request, res: Response) {
+//     const data = req.params;
+//     console.log(data);
+//     res.redirect('')
+//     // Ainda não redireciona
+// }
+
+
+// Aqui devo enviar os dados do usuário
+/*
+export async function receberDadosDaPagina(req: Request, res: Response) {
+    try {
+        const user = await AppDataSource.getRepository(User).findOne({
+            where: { id: parseInt(idUsuario) }
+        });
+
+        res.status(200).json({
+            ok: true,
+            message: "Users found",
+            users: users
+        })
+    } catch (error) {
+        console.log("Ocorreu um erro: ", error)
+    }
+}*/
