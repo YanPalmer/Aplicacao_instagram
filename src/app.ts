@@ -8,7 +8,7 @@ app.use(Express.static("public"));
 app.post('/cadastrarUsuario', cadastrarUsuario);
 app.post('/validarUsuario', validarUsuario);
 
-app.get('/pagina_usuario/receberDadosDaPagina', receberDadosDaPagina)
+app.get('/pagina_usuario/:id/:name/:email', receberDadosDaPagina)
 
 // app.get('/pages/pagina_inicial/:id/:email/pagina_inicial.html', loginUsuario)
 

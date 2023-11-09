@@ -21,9 +21,9 @@ async function validar() {
             const responseJSON = await response.json();
             console.log(responseJSON.message);
             if (responseJSON.redirect === true) {
-                window.alert("Usuário validado com sucesso");
+                // window.alert(responseJSON.message);
                 // const response2 = fetch(`/pages/pagina_inicial/${responseJSON.id}/${responseJSON.email}/pagina_inicial.html`)
-                window.location.href = 'http://localhost:3000/pages/pagina_usuario/pagina_usuario.html';
+                // window.location.href = 'http://localhost:3000/pages/pagina_usuario/pagina_usuario.html';
             } else {
                 window.alert(responseJSON.message);
             }

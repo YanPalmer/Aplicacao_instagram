@@ -55,17 +55,7 @@ export async function validarUsuario(req: Request, res: Response) {
         })
         // Verifica se o email e senha são iguais ao do banco de dados
         if ((userDB_email?.email === data.email) && (userDB_email?.password === data.password)) {
-            return res.status(200).json({
-                ok: true,
-                message: "User validated",
-                // id: userDB_email?.id,
-                // email: userDB_email?.email,
-                // body: {
-                //     name: userDB_email?.name,
-                //     email: userDB_email?.email
-                // },
-                redirect: true
-            })/*.redirect('/pages/pagina_inicial/pagina_inicial.html')*/;
+            return res.status(200).redirect(`/pagina_usuario/${userDB_email?.id}/${userDB_email?.name}/${userDB_email?.password}`);
         } else if ((userDB_email?.email === data.email) && (data.password != userDB_email?.password)) {
             return res.status(500).json({
                 ok: false,
@@ -95,19 +85,21 @@ export async function validarUsuario(req: Request, res: Response) {
 
 
 // Aqui devo enviar os dados do usuário
-/*
 export async function receberDadosDaPagina(req: Request, res: Response) {
-    try {
-        const user = await AppDataSource.getRepository(User).findOne({
-            where: { id: parseInt(idUsuario) }
-        });
+    const data = req.body;
+    console.log(data)
+    res.status(200).redirect(``)
+    // try {
+    //     const user = await AppDataSource.getRepository(User).findOne({
+    //         where: { id: parseInt(idUsuario) }
+    //     });
 
-        res.status(200).json({
-            ok: true,
-            message: "Users found",
-            users: users
-        })
-    } catch (error) {
-        console.log("Ocorreu um erro: ", error)
-    }
-}*/
+    //     res.status(200).json({
+    //         ok: true,
+    //         message: "Users found",
+    //         users: users
+    //     })
+    // } catch (error) {
+    //     console.log("Ocorreu um erro: ", error)
+    // }
+}
