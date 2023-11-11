@@ -1,21 +1,27 @@
 
+window.addEventListener('beforeunload', () => {
+    // Remove o dado do sessionStorage
+    sessionStorage.removeItem('Id');
+    sessionStorage.removeItem('Name');
+    sessionStorage.removeItem('Email');
+})
 
-// Código que irá enviar uma nova postagem para minhas rotas no app
+window.addEventListener('load', preencherCampos);
 
-async function receberDados() {
-    // Pegar o NOME e EMAIL no banco
-    const response = await fetch('/pagina_usuario/receberDadosDaPagina', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+function preencherCampos() {
+    // Recebe os valores dos campos
+    const nomeUsuario = document.getElementById("nomeUsuario");
+    const emailUsuario = document.getElementById("emailUsuario");
+    const Name = sessionStorage.getItem('Name');
+    const Email = sessionStorage.getItem('Email');
 
-    const resposta = await response.json();
-    console.log(resposta);
+    if (Name === null && Email === null) {
+        alert("Você deve logar novamente");
+    } else {
+        // Insere o valor dos campos no documento
+        nomeUsuario.textContent = Name;
+        emailUsuario.textContent = Email;
+        alert(`Bem vindo "${nomeUsuario.textContent}"`);
+    }
 
 }
-
-
-// Desabilitar quando conseguir pegar os dados do usuário
-// receberDados();

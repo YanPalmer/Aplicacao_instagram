@@ -55,7 +55,17 @@ export async function validarUsuario(req: Request, res: Response) {
         })
         // Verifica se o email e senha são iguais ao do banco de dados
         if ((userDB_email?.email === data.email) && (userDB_email?.password === data.password)) {
-            return res.status(200).redirect(`/pagina_usuario/${userDB_email?.id}/${userDB_email?.name}/${userDB_email?.email}`);
+            console.log("Usuário logado com sucesso");
+            return res.status(200).json({
+                ok: true,
+                message: "Usuário logado",
+                redirect: true,
+                body: {
+                    id: userDB_email?.id,
+                    name: userDB_email?.name,
+                    email: userDB_email?.email
+                }
+            })
         } else if ((userDB_email?.email === data.email) && (data.password != userDB_email?.password)) {
             return res.status(500).json({
                 ok: false,
@@ -75,7 +85,7 @@ export async function validarUsuario(req: Request, res: Response) {
     }
 }
 
-
+/*
 // Aqui devo enviar os dados do usuário
 export async function loginUsuario(req: Request, res: Response) {
     const data = req.body;
@@ -98,4 +108,4 @@ export async function loginUsuario(req: Request, res: Response) {
     // } catch (error) {
     //     console.log("Ocorreu um erro: ", error)
     // }
-}
+}*/

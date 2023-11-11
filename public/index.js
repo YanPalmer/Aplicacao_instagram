@@ -20,11 +20,14 @@ async function validar() {
 
             const responseJSON = await response.json();
             
-            if (responseJSON) {
+            if (responseJSON.redirect === true) {
                 console.log(responseJSON.message);
-                // window.alert(responseJSON.message);
+                window.alert(responseJSON.message);
                 // const response2 = fetch(`/pages/pagina_inicial/${responseJSON.id}/${responseJSON.email}/pagina_inicial.html`)
-                // window.location.href = 'http://localhost:3000/pages/pagina_usuario/pagina_usuario.html';
+                const id = sessionStorage.setItem("Id", responseJSON.body.id);
+                const name = sessionStorage.setItem("Name", responseJSON.body.name);
+                const email = sessionStorage.setItem("Email", responseJSON.body.email);
+                window.location.href = 'http://localhost:3000/pages/pagina_usuario/pagina_usuario.html';
             } else {
                 window.alert(responseJSON.message);
             }
