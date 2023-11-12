@@ -87,3 +87,11 @@ body main section article p {
     overflow: auto;
     height: 86px;
 }
+
+body main section article button {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    right: 0;
+}
