@@ -25,6 +25,22 @@ function preencherCampos() {
     }
 
     // CÓDIGO PARA PEGAR AS IMAGENS DO BANCO DE DADOS
+    if (Name && Email) {
+        async function pegarImagensDB() {
+            const response = await fetch('/buscarPostagens', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: sessionStorage.getItem("Id")
+                })
+            });
+        }
+        pegarImagensDB();
+    } else {
+        console.log("Faça login");
+    }
 
 }
 
@@ -36,6 +52,11 @@ function adicionarPostagem() {
     adicionarPostagem.addEventListener('click', novaPostagem);
 
     function novaPostagem() {
+        // function varificador() {
+        //     if (numPostagens) {
+                
+        //     }
+        // }
         const article = document.createElement('article');
 
         const img = document.createElement('img');
@@ -55,6 +76,7 @@ function adicionarPostagem() {
         const button = document.createElement('button');
         button.id = "enviarPostagem";
         button.innerHTML = "Enviar";
+        button.addEventListener('click', criarPostagemDB);
 
 
         article.appendChild(img);
@@ -64,6 +86,25 @@ function adicionarPostagem() {
 
         const section = document.getElementById("postagens");
         section.appendChild(article);
+
+
+        // Adicionar postagem no banco de dados
+        async function criarPostagemDB() {
+            // Implementar uma regra que crie uma postagem com os valores crescentes P1, P2, P3...
+            // const postagem = document.getElementById("P1");
+            alert("Enviando:", )
+            // const response = await fetch('/criarPostagemDB', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         email: email,
+            //         password: senha
+            //     })
+            // });
+        }
+
     }
 
     function exibirImagemSelecionada(input, img) {
