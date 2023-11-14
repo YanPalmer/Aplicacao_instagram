@@ -7,14 +7,6 @@ import { User } from "../entyti/entity.User";
 export async function buscarPostagens(req: Request, res: Response) {
     const id = req.body
 
-    /* SALVA POSTAGENS
-    const postagemTeste = new Post();
-    postagemTeste.imagem = 444;
-    postagemTeste.description = "Uma descrição qualquer";
-    postagemTeste.user = id;
-    await AppDataSource.getRepository(Post).save(postagemTeste);
-    */
-
     // Procura no banco se existem posts com o ID recebido
     const userPosts = await AppDataSource.getRepository(Post).find({
         where: {
@@ -42,4 +34,24 @@ export async function buscarPostagens(req: Request, res: Response) {
         })
     }
     
+}
+
+export async function salvarPostagem(req: Request, res: Response) {
+    const data = req.body;
+    // console.log(data.id, data.postagem.imagem, data.postagem.descricao);
+
+    // SALVA POSTAGENS
+    const novaPostagem = new Post();
+    novaPostagem.imagem = data.postagem.imagem;
+    novaPostagem.description = data.postagem.descricao;
+    novaPostagem.user = data.id;
+    const postagemCriada = await AppDataSource.getRepository(Post).save(novaPostagem);
+
+    console.log(postagemCriada);
+    return res.status(201).json({
+        ok: true,
+        message: "Postagem criada com sucesso",
+        body: postagemCriada
+    });
+
 }

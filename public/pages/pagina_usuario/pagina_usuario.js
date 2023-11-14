@@ -8,6 +8,7 @@ window.addEventListener('beforeunload', () => {
 
 window.addEventListener('load', preencherCampos);
 
+const numPostagens = 0;
 function preencherCampos() {
     // Recebe os valores dos campos
     const nomeUsuario = document.getElementById("nomeUsuario");
@@ -52,85 +53,97 @@ function preencherCampos() {
     } else {
         console.log("Faça login");
     }
+
+    const input = document.getElementById("inputImagem");
+    const img = document.getElementById("imagemSelecionada");
+    input.addEventListener('change', function () {
+        exibirImagemSelecionada(input, img);
+    });
 }
 
 
+
+const listaDePostagens = [];
 // Copiado do chatGPT
 // Código que cria um bloco para realizar uma postagem
-function adicionarPostagem() {
-    const adicionarPostagem = document.getElementById("adicionarPostagem");
-    adicionarPostagem.addEventListener('click', novaPostagem);
+const adicionarPostagem = document.getElementById("adicionarPostagem");
+adicionarPostagem.addEventListener('click', novaPostagem);
 
-    function novaPostagem() {
-        // function varificador() {
-        //     if (numPostagens) {
+async function novaPostagem() {
+    const imagem = document.getElementById("imagemSelecionada");
+    const descricaoUsuario = document.getElementById("descricaoUsuario").value;
+    const postagem = {
+        imagem: imagem.src,
+        descricao: descricaoUsuario
+    }
+    console.log(postagem);
 
-        //     }
-        // }
-        const article = document.createElement('article');
+    const response = await fetch('/salvarPostagem', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: sessionStorage.getItem("Id"),
+            postagem: postagem
+        })
+    });
+    const resposta = await response.json();
+    console.log(resposta);
+    // A partir daqui a postagem foi salva no banco de dados
 
-        const img = document.createElement('img');
-        img.src = "../../images/sem_imagem.jpg";
+    // function varificador() {
+    //     if (numPostagens) {
 
-        const input = document.createElement('input');
-        input.type = "file";
-        input.accept = "image/*";
-        input.addEventListener('change', function () {
-            exibirImagemSelecionada(input, img);
-        });
+    //     }
+    // }
+    const article = document.createElement('article');
 
-        const descricao = document.createElement('input');
-        descricao.id = "descricao";
-        descricao.placeholder = "Escreva o que está pensando";
+    const buttonX = document.createElement('button');
+    buttonX.id = "removeChild";
+    buttonX.innerHTML = "X"
 
-        const button = document.createElement('button');
-        button.id = "enviarPostagem";
-        button.innerHTML = "Enviar";
-        button.addEventListener('click', criarPostagemDB);
+    const img = document.createElement('img');
+    img.src = postagem.imagem;
 
+    const p = document.createElement('p');
+    p.id = "descricao";
+    p.innerHTML = postagem.descricao;
 
-        article.appendChild(img);
-        article.appendChild(input);
-        article.appendChild(descricao);
-        article.appendChild(button);
+    article.appendChild(buttonX);
+    article.appendChild(img);
+    article.appendChild(p);
 
-        const section = document.getElementById("postagens");
-        section.appendChild(article);
+    const section = document.getElementById("postagens");
+    section.appendChild(article);
 
 
-        // Adicionar postagem no banco de dados
-        async function criarPostagemDB() {
-            // Implementar uma regra que crie uma postagem com os valores crescentes P1, P2, P3...
-            // const postagem = document.getElementById("P1");
-            alert("Enviando:",)
-            // const response = await fetch('/criarPostagemDB', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //         email: email,
-            //         password: senha
-            //     })
-            // });
-        }
-
+    // Adicionar postagem no banco de dados
+    async function criarPostagemDB() {
+        // Implementar uma regra que crie uma postagem com os valores crescentes P1, P2, P3...
+        // const postagem = document.getElementById("P1");
+        alert("Enviando:",)
+        // const response = await fetch('/criarPostagemDB', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         email: email,
+        //         password: senha
+        //     })
+        // });
     }
 
-    function exibirImagemSelecionada(input, img) {
-        if (input.files && input.files[0]) {
-            var leitor = new FileReader();
-
-            leitor.onload = function (e) {
-                img.src = e.target.result;
-            };
-
-            leitor.readAsDataURL(input.files[0]);
-        }
-    } // Copiado do chatGPT
 }
+function exibirImagemSelecionada(input, img) {
+    if (input.files && input.files[0]) {
+        var leitor = new FileReader();
 
+        leitor.onload = function (e) {
+            img.src = e.target.result;
+        };
 
-
-
-adicionarPostagem();
+        leitor.readAsDataURL(input.files[0]);
+    }
+} // Copiado do chatGPT

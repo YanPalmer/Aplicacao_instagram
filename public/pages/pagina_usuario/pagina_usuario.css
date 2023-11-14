@@ -32,6 +32,8 @@ body div#informacoesPessoais {
 body main {
     position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 body main div#areaPublicacao {
@@ -43,6 +45,19 @@ body main div#areaPublicacao {
     background-color: rgb(201, 201, 201);
 }
 
+body main article#enviarNovaPostagem {
+    position: relative;
+    width: 300px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+body main button#adicionarPostagem {
+    width: 300px;
+    height: 30px;
+}
+
 body main section {
     position: relative;
     width: 100%;
@@ -52,7 +67,8 @@ body main section {
     gap: 10px;
 }
 
-body main section article {
+body main section article,
+article#enviarNovaPostagem {
     position: relative;
     width: 100%;
     height: 280px;
@@ -61,7 +77,26 @@ body main section article {
     border: 0.1px solid gray;
 }
 
-body main section article h3 {
+main section article button#removeChild {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(253, 81, 81);
+    color: white;
+    z-index: 2;
+    border: 0 solid;
+}
+main section article button#removeChild:hover {
+    background-color: rgb(255, 152, 152);
+}
+
+body main section article h3,
+article#enviarNovaPostagem h3 {
     position: relative;
     display: flex;
     justify-content: center;
@@ -71,7 +106,8 @@ body main section article h3 {
     background-color: cadetblue;
 }
 
-body main section article img {
+body main section article img,
+article#enviarNovaPostagem img {
     position: relative;
     width: 100%;
     height: 60%;
@@ -80,7 +116,8 @@ body main section article img {
     border-bottom: 0.1px solid grey;
 }
 
-body main section article p {
+body main section article p,
+article#enviarNovaPostagem p {
     position: relative;
     margin: 5px 4px;
     text-indent: 6px;
@@ -88,7 +125,8 @@ body main section article p {
     height: 86px;
 }
 
-body main section article button {
+body main section article button,
+article#enviarNovaPostagem button {
     position: absolute;
     width: 100%;
     height: auto;
