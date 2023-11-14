@@ -15,15 +15,31 @@ export async function buscarPostagens(req: Request, res: Response) {
     await AppDataSource.getRepository(Post).save(postagemTeste);
     */
 
+    // Procura no banco se existem posts com o ID recebido
     const userPosts = await AppDataSource.getRepository(Post).find({
         where: {
             user: id
         }
     });
-    if (userPosts) {
-        console.log(userPosts.length);
+    
+    if (userPosts.length != 0) {
+        console.log(`Usuário de ID: ${req.body.id} tem ${userPosts.length} postagens`);
+        
+        // Devo apresentar as postagens na tela do usuário
+        return res.status(200).json({
+            ok: true,
+            message: "Enviando postagens para a página do usuário",
+            body: userPosts
+        })
+
+
     } else {
-        console.log("Não existem postagens");
+        console.log(`Usuário de ID: ${req.body.id} não tem postagens`);
+        return res.status(500).json({
+            ok: false,
+            message: "Nenhuma postagem encontrada",
+            body: userPosts
+        })
     }
     
 }

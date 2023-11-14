@@ -36,12 +36,22 @@ function preencherCampos() {
                     id: sessionStorage.getItem("Id")
                 })
             });
+            const resposta = await response.json();
+            // console.log(resposta.body);
+
+            if (resposta.body.length == 0) {
+                alert("Você ainda não tem nenhuma postagem!");
+            } else if (resposta.body.length > 0) {
+                console.log(resposta.body);
+
+                // Construir as postagens na página do usuário
+            }
+
         }
         pegarImagensDB();
     } else {
         console.log("Faça login");
     }
-
 }
 
 
@@ -54,7 +64,7 @@ function adicionarPostagem() {
     function novaPostagem() {
         // function varificador() {
         //     if (numPostagens) {
-                
+
         //     }
         // }
         const article = document.createElement('article');
@@ -92,7 +102,7 @@ function adicionarPostagem() {
         async function criarPostagemDB() {
             // Implementar uma regra que crie uma postagem com os valores crescentes P1, P2, P3...
             // const postagem = document.getElementById("P1");
-            alert("Enviando:", )
+            alert("Enviando:",)
             // const response = await fetch('/criarPostagemDB', {
             //     method: 'POST',
             //     headers: {

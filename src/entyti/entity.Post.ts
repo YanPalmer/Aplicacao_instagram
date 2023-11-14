@@ -7,8 +7,8 @@ export class Post {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({default: 3})
-    imagem: number;
+    @Column({default: null})
+    imagem: string;
     // imagem: Imagem;
 
     @Column()
