@@ -73,27 +73,27 @@ async function novaPostagem() {
 
     pegarImagensDB();
 
-/*
-    const article = document.createElement('article');
-
-    const buttonX = document.createElement('button');
-    buttonX.id = "removeChild";
-    buttonX.innerHTML = "X"
-
-    const img = document.createElement('img');
-    img.src = postagem.imagem;
-
-    const p = document.createElement('p');
-    p.id = "descricao";
-    p.innerHTML = postagem.descricao;
-
-    article.appendChild(buttonX);
-    article.appendChild(img);
-    article.appendChild(p);
-
-    const section = document.getElementById("postagens");
-    section.appendChild(article);
-*/
+    /*
+        const article = document.createElement('article');
+    
+        const buttonX = document.createElement('button');
+        buttonX.id = "removeChild";
+        buttonX.innerHTML = "X"
+    
+        const img = document.createElement('img');
+        img.src = postagem.imagem;
+    
+        const p = document.createElement('p');
+        p.id = "descricao";
+        p.innerHTML = postagem.descricao;
+    
+        article.appendChild(buttonX);
+        article.appendChild(img);
+        article.appendChild(p);
+    
+        const section = document.getElementById("postagens");
+        section.appendChild(article);
+    */
 }
 function exibirImagemSelecionada(input, img) {
     if (input.files && input.files[0]) {
@@ -119,13 +119,38 @@ async function pegarImagensDB() {
         })
     });
     const resposta = await response.json();
-    console.log("Postagens encontradas do banco", resposta.body);
+    // console.log("Postagens encontradas do banco", resposta.body);
 
     if (resposta.body.length > 0) {
-        console.log("Existem postagens no nosso banco",resposta.body);
+        console.log("Existem postagens no nosso banco", resposta.body);
+
+        const pagina = document.getElementById("postagens");
+        pagina.innerHTML = "";
 
         // Construir as postagens na página do usuário
+        resposta.body.forEach(element => {
+            // console.log("elemento",element);
 
+            const article = document.createElement('article');
+
+            const buttonX = document.createElement('button');
+            buttonX.id = "removeChild";
+            buttonX.innerHTML = "X"
+
+            const img = document.createElement('img');
+            img.src = "../../images/sem_imagem.jpg";
+
+            const p = document.createElement('p');
+            p.id = "descricao";
+            p.innerHTML = element.description;
+
+            article.appendChild(buttonX);
+            article.appendChild(img);
+            article.appendChild(p);
+
+            const section = document.getElementById("postagens");
+            section.appendChild(article);
+        });
 
 
     } else if (resposta.body.length == 0) {
