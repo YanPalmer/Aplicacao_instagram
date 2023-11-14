@@ -27,29 +27,8 @@ function preencherCampos() {
 
     // CÓDIGO PARA PEGAR AS IMAGENS DO BANCO DE DADOS
     if (Name && Email) {
-        async function pegarImagensDB() {
-            const response = await fetch('/buscarPostagens', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: sessionStorage.getItem("Id")
-                })
-            });
-            const resposta = await response.json();
-            // console.log(resposta.body);
-
-            if (resposta.body.length == 0) {
-                alert("Você ainda não tem nenhuma postagem!");
-            } else if (resposta.body.length > 0) {
-                console.log(resposta.body);
-
-                // Construir as postagens na página do usuário
-            }
-
-        }
         pegarImagensDB();
+
     } else {
         console.log("Faça login");
     }
@@ -63,7 +42,7 @@ function preencherCampos() {
 
 
 
-const listaDePostagens = [];
+// const listaDePostagens = [];
 // Copiado do chatGPT
 // Código que cria um bloco para realizar uma postagem
 const adicionarPostagem = document.getElementById("adicionarPostagem");
@@ -73,7 +52,7 @@ async function novaPostagem() {
     const imagem = document.getElementById("imagemSelecionada");
     const descricaoUsuario = document.getElementById("descricaoUsuario").value;
     const postagem = {
-        imagem: imagem.src,
+        // imagem: imagem.src,
         descricao: descricaoUsuario
     }
     console.log(postagem);
@@ -92,11 +71,9 @@ async function novaPostagem() {
     console.log(resposta);
     // A partir daqui a postagem foi salva no banco de dados
 
-    // function varificador() {
-    //     if (numPostagens) {
+    pegarImagensDB();
 
-    //     }
-    // }
+/*
     const article = document.createElement('article');
 
     const buttonX = document.createElement('button');
@@ -116,25 +93,7 @@ async function novaPostagem() {
 
     const section = document.getElementById("postagens");
     section.appendChild(article);
-
-
-    // Adicionar postagem no banco de dados
-    async function criarPostagemDB() {
-        // Implementar uma regra que crie uma postagem com os valores crescentes P1, P2, P3...
-        // const postagem = document.getElementById("P1");
-        alert("Enviando:",)
-        // const response = await fetch('/criarPostagemDB', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         email: email,
-        //         password: senha
-        //     })
-        // });
-    }
-
+*/
 }
 function exibirImagemSelecionada(input, img) {
     if (input.files && input.files[0]) {
@@ -147,3 +106,30 @@ function exibirImagemSelecionada(input, img) {
         leitor.readAsDataURL(input.files[0]);
     }
 } // Copiado do chatGPT
+
+
+async function pegarImagensDB() {
+    const response = await fetch('/buscarPostagens', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: sessionStorage.getItem("Id")
+        })
+    });
+    const resposta = await response.json();
+    console.log("Postagens encontradas do banco", resposta.body);
+
+    if (resposta.body.length > 0) {
+        console.log("Existem postagens no nosso banco",resposta.body);
+
+        // Construir as postagens na página do usuário
+
+
+
+    } else if (resposta.body.length == 0) {
+        alert("Você ainda não tem nenhuma postagem!");
+    }
+
+}

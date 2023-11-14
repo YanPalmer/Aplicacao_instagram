@@ -42,7 +42,7 @@ export async function salvarPostagem(req: Request, res: Response) {
 
     // SALVA POSTAGENS
     const novaPostagem = new Post();
-    novaPostagem.imagem = data.postagem.imagem;
+    // novaPostagem.imagem = data.postagem.imagem; CONCERTAR DEPOIS
     novaPostagem.description = data.postagem.descricao;
     novaPostagem.user = data.id;
     const postagemCriada = await AppDataSource.getRepository(Post).save(novaPostagem);
