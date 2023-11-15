@@ -53,6 +53,8 @@ body section article img {
     position: relative;
     width: 100%;
     height: 220px;
+    object-fit: contain;
+    border: 0.1px solid gray;
 }
 
 body section article p {
