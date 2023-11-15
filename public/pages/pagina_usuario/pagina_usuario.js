@@ -1,15 +1,30 @@
 
-window.addEventListener('beforeunload', () => {
-    // Remove o dado do sessionStorage
-    sessionStorage.removeItem('Id');
-    sessionStorage.removeItem('Name');
-    sessionStorage.removeItem('Email');
-})
+// window.addEventListener('beforeunload', () => {
+//     // Remove o dado do sessionStorage
+//     sessionStorage.removeItem('Id');
+//     sessionStorage.removeItem('Name');
+//     sessionStorage.removeItem('Email');
+// })
 
-window.addEventListener('load', preencherCampos);
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') {
+        // A página está ativa
+        iniciar();
+    }
+});
+
+const iniciar = window.addEventListener('load', preencherCampos);
+
 
 const numPostagens = 0;
 function preencherCampos() {
+
+    const button = document.getElementById("paginaInicial");
+    button.addEventListener('click', carregarDados);
+    function carregarDados() {
+        window.location.href = 'http://localhost:3000/pages/pagina_inicial/pagina_inicial.html';
+    }
+    
     // Recebe os valores dos campos
     const nomeUsuario = document.getElementById("nomeUsuario");
     const emailUsuario = document.getElementById("emailUsuario");

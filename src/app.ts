@@ -1,6 +1,6 @@
 import Express, { request, response } from "express";
 import { cadastrarUsuario, validarUsuario } from "./controlers/cadastrarUsuario";
-import { buscarPostagens, salvarPostagem } from "./controlers/buscarPostagens";
+import { buscarPostagens, carregarPaginaInicial, salvarPostagem } from "./controlers/buscarPostagens";
 const app = Express();
 
 app.use(Express.json());
@@ -15,6 +15,8 @@ app.post('/validarUsuario', validarUsuario);
 
 app.post('/buscarPostagens', buscarPostagens);
 app.post('/salvarPostagem', salvarPostagem);
+
+app.get('/carregarPaginaInicial', carregarPaginaInicial);
 
 // app.get('/pagina_usuario/:id/:nome/:email', loginUsuario)
 

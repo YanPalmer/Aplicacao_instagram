@@ -1,6 +1,15 @@
 const button = document.getElementById("validar");
 button.addEventListener('click', validar);
 
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') {
+        // A página está ativa
+        sessionStorage.removeItem('Id');
+        sessionStorage.removeItem('Name');
+        sessionStorage.removeItem('Email');
+    }
+});
+
 async function validar() {
     const email = document.getElementById("email").value;
     const senha = document.getElementById("senha").value;
@@ -19,7 +28,7 @@ async function validar() {
             });
 
             const responseJSON = await response.json();
-            
+
             if (responseJSON.redirect === true) {
                 console.log(responseJSON.message);
                 window.alert(responseJSON.message);
