@@ -59,9 +59,25 @@ export async function salvarPostagem(req: Request, res: Response) {
 
 export async function carregarPaginaInicial(req: Request, res: Response) {
 
-    // Implementar a lógica para randomizar as postagens na PÁGINA WEB
+    // Lógica para randomizar as postagens na PÁGINA WEB
 
-    const dados = await AppDataSource.getRepository(Post).find();
+    const dados = await AppDataSource.getRepository(Post).find({
+        relations: [
+            'user'
+        ]
+    });
+    // console.log(dados, "fim");
+    
+    const listaDeDados: any[] = [];
+    dados.forEach(element => {
+        const informacoes = {
+            email: element.user.email,
+            imagem: element.imagem,
+            descricao: element.description
+        }
+        listaDeDados.push(informacoes)
+        // console.log(informacoes)
+    });
 
 
     // CHAT GPT * * *
@@ -73,9 +89,10 @@ export async function carregarPaginaInicial(req: Request, res: Response) {
         // Randomiza a ordem da lista usando a função de comparação aleatória
         return lista.sort(comparacaoAleatoria);
     }
-    const listaRandomizada = randomizarLista(dados);
-    console.log("aqui estão os dados", listaRandomizada, "fim dos dados");
+    const listaRandomizada = randomizarLista(listaDeDados);
+    // console.log("aqui estão os dados", listaRandomizada, "fim dos dados");
     // CHAT GPT * * *
+    // console.log(listaRandomizada)
 
 
     return res.status(200).json({

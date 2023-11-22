@@ -15,20 +15,19 @@ async function preencherPaginaInicial() {
 
     resposta.dados.forEach(element => {
         // Função que renderiza as postagens na página inicial
-        // SÓ FALTA ISSO
-        // console.log(element.id, element.imagem, element.description);
+        console.log(element.email, element.imagem, element.descricao);
 
         const article = document.createElement('article');
 
         const h3 = document.createElement('h3');
-        h3.innerHTML = element.id;
+        h3.innerHTML = element.email;
 
         const img = document.createElement('img');
-        img.src = "../../images/sem_imagem.jpg";
-        // img.src = element.image;
+        // img.src = "../../images/sem_imagem.jpg";
+        img.src = element.image;
 
         const p = document.createElement('p');
-        p.innerHTML = element.description;
+        p.innerHTML = element.descricao;
 
         article.appendChild(h3);
         article.appendChild(img);
